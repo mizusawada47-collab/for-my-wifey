@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For My Wifey ❤️</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #fff0f5;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 28px 20px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 8px 30px #e8a5b344;
+}
+h1 { color: #dc648c; font-size: 26px; }
+p { color: #765461; line-height: 1.6; }
+button {
+  display: block;
+  width: 100%;
+  background: #e879a1;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:active { background: #c9517c; }
+img {
+  max-width: 100%;
+  border-radius: 14px;
+  margin: 12px 0;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1 id="question"></h1>
+  <div id="photo"></div>
+  <p id="message"></p>
+  <div id="answers"></div>
+</div>
+<script>
+const pages = {
+  start: {
+    question: "Hi, my birthday girl! 💗",
+    message: "I made something special for you.",
+    answers: [
+      ["What is it? 🥹", "curious"],
+      ["Awww, really? ❤️", "happy"]
+    ]
+  },
+  curious: {
+    question: "Are you excited?",
+    message: "I hope this makes you smile!",
+    answers: [
+      ["YESSS!", "ending"],
+      ["Tell me more!", "memory"]
+    ]
+  },
+  happy: {
+    question: "Do you know how special you are?",
+    answers: [
+      ["Of course! 💕", "ending"],
+      ["How special? 🥹", "memory"]
+    ]
+  },
+  memory: {
+    question: "Remember our little moments?",
+    message: "Every memory with you matters to me.",
+    // Add a photo later:
+    // image: "photo1.jpg",
+    answers: [
+      ["I remember ❤️", "ending"],
+      ["Tell me more 🥹", "ending"]
+    ]
+  },
+  ending: {
+    question: "Happy Birthday, my love! 🎂❤️",
+    message: "Thank you for being part of my life.",
+    answers: [
+      ["Start again 💗", "start"]
+    ]
+  }
+};
+
+function showPage(id) {
+  const page = pages[id];
+  if (!page) return;
+
+  document.getElementById("question").textContent =
+    page.question;
+
+  document.getElementById("message").textContent =
+    page.message || "";
+
+  document.getElementById("photo").innerHTML = "";
+
+  if (page.image) {
+    const img = document.createElement("img");
+    img.src = page.image;
+    img.alt = "Our memory";
+    document.getElementById("photo").appendChild(img);
+  }
+
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  page.answers.forEach(([label, next]) => {
+    const button = document.createElement("button");
+    button.textContent = label;
+    button.onclick = () => showPage(next);
+    answers.appendChild(button);
+  });
+}
+
+showPage("start");
+</script>
+</body>
+</html>
+  
